@@ -35,19 +35,26 @@ import CssBaseline from '@mui/material/CssBaseline';
 import MyForm from './components/MyForm';
 import ExtendedForm from './components/ExtendedForm';
 import FormWithYup from './components/FormWithYup';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import TemporaryDrawer from './components/TemporaryDrawer';
 
 
 
 function App() {
+  const [counter, setCounter] = React.useState(0);
+  const incrementer = () => setCounter((previousValue) => previousValue + 1) ;
+  function incrementer2() {
+    setCounter((previousState) => previousState + 1);
+  }
   const jsxElement =
     <BrowserRouter>
       <nav>
         <ul>
-          <li ><a href="/">MyForm</a></li>
-          <li ><a href="/extended">ExtendedForm</a></li>
-          <li ><a href="/yup">FormWithYup</a></li>
-          <li ><a href="/tabela">ElementiTabele</a></li>
+          <li><Link to="/">MyForm</Link></li>
+          <li><Link to="/extended">ExtendedForm</Link></li>
+          <li><Link to="/yup">FormWithYup</Link></li>
+          <li><Link to="/tabela">ElementiTabele</Link></li>
+          <li><Link to="/drawer">TemporaryDrawer</Link></li>
         </ul>
       </nav>
       <Routes>
@@ -55,7 +62,12 @@ function App() {
         <Route path="/extended" element={<ExtendedForm />} />
         <Route path="/yup" element={<FormWithYup />} />
         <Route path="/tabela" element={<ElementiTabele />} />
+        <Route path="/drawer" element={<TemporaryDrawer />} />
       </Routes>
+      <p>Counter: {counter}</p>
+      <Button variant="contained" onClick={incrementer2}>
+        Increment Counter
+      </Button>
     </BrowserRouter>
   ;
   return jsxElement;
