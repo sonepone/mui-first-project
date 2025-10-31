@@ -29,41 +29,14 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import ElementiTabele from './components/ElementiTabele';
+import ElementiTabele from './ElementiTabele';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MyForm from './components/MyForm';
 import ExtendedForm from './components/ExtendedForm';
 import FormWithYup from './components/FormWithYup';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-
-
-function App() {
-  const jsxElement =
-    <BrowserRouter>
-      <nav>
-        <ul>
-          <li ><a href="/">MyForm</a></li>
-          <li ><a href="/extended">ExtendedForm</a></li>
-          <li ><a href="/yup">FormWithYup</a></li>
-          <li ><a href="/tabela">ElementiTabele</a></li>
-        </ul>
-      </nav>
-      <Routes>
-        <Route path="/" element={<MyForm />} />
-        <Route path="/extended" element={<ExtendedForm />} />
-        <Route path="/yup" element={<FormWithYup />} />
-        <Route path="/tabela" element={<ElementiTabele />} />
-      </Routes>
-    </BrowserRouter>
-  ;
-  return jsxElement;
-}
-
-
-//export default function App() {
-function App1() {
+export default function App() {
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
@@ -97,4 +70,3 @@ const darkTheme = createTheme({
     // </ThemeProvider>
   );
 }
-export default App;
