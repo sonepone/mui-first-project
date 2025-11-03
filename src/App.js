@@ -39,6 +39,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import TemporaryDrawer from './components/TemporaryDrawer';
 import Layout from './shell/Layout';
 import Orders from './components/Orders';
+import OrderDetails from './components/OrderDetails';
 
 
 
@@ -48,7 +49,12 @@ function App() {
   // function incrementer2() {
   //   setCounter((previousState) => previousState + 1);
   // }
-
+   const orders = Array.from({length: 25}, (v, k) => ({
+        id: k+1,
+        customerName: `Customer ${k+1}`,
+        orderDate: `2022-01-${k+1 < 10 ? '0' : ''}${k+1}`,
+        description: `Order ${k+1} description`
+    }));
   
 
   const jsxElement =
@@ -60,7 +66,8 @@ function App() {
           <Route path="/yup" element={<FormWithYup />} />
           <Route path="/tabela" element={<ElementiTabele />} />
           <Route path="/drawer" element={<TemporaryDrawer />} />
-          <Route path="/orders" element={<Orders />} />
+          <Route path="/orders" element={<Orders orders={orders}/>} />
+          <Route path="/orders/:id" element={<OrderDetails allOrders={orders} showBig={true} />} />
         </Routes>
       </Layout>
     </BrowserRouter>
