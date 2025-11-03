@@ -13,7 +13,7 @@ function Orders({orders}) {
 
                 {orders.map(order => (
                 <li key={order.id} style={{ listStyle: 'none'}}>
-                    <NavLink to={`/orders/${order.id}`}>
+                    <NavLink style={{ textDecoration: 'none' }} to={`/orders/${order.id}`}>
                        <OrderDetails order={order} allOrders={orders} showBig={false} />
                     </NavLink>
                 </li>

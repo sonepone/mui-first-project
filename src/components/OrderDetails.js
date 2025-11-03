@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';    
 import { NavLink, useParams } from 'react-router-dom';
+import classes from './OrderDetails.module.css';
 
 function OrderDetails({ order, allOrders, showBig }) {
 
@@ -28,8 +29,8 @@ function OrderDetails({ order, allOrders, showBig }) {
 
         const jsxElement2 = (
         <React.Fragment>
-            <div className="modal-overlay" onClick={(e) => e.stopPropagation()} />
-            <div className="modal-dialog">
+            <div className={classes.modal_overlay} onClick={(e) => e.stopPropagation()} />
+            <div className={classes.modal_dialog}>
                 <Card variant="outlined">
                     <CardContent>
                         <h3>Order ID: {order2.id}</h3>
@@ -40,7 +41,7 @@ function OrderDetails({ order, allOrders, showBig }) {
                     </CardContent>
                 </Card>
             </div>
-            <style>{`
+            {/* <style>{`
                 .modal-overlay {
                     position: fixed;
                     top: 0;
@@ -60,7 +61,7 @@ function OrderDetails({ order, allOrders, showBig }) {
                     padding: 20px;
                     z-index: 2;
                 }
-            `}</style>
+            `}</style> */}
         </React.Fragment>
     );
         jsxElement = jsxElement2;
