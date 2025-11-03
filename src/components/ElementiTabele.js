@@ -27,7 +27,7 @@ for (let i = 7; i <= 500; i++) {
 
 export default function ElementiTabele() {
   return (
-    <Box sx={{ height: 700, width: '80%', margin: 'auto', marginTop: 5 }}>
+    <Box sx={{ height: 400, width: '80%', margin: 'auto', marginTop: 5 }}>
       <DataGrid
         rows={rows}
         columns={columns}

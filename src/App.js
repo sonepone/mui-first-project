@@ -35,39 +35,34 @@ import CssBaseline from '@mui/material/CssBaseline';
 import MyForm from './components/MyForm';
 import ExtendedForm from './components/ExtendedForm';
 import FormWithYup from './components/FormWithYup';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import TemporaryDrawer from './components/TemporaryDrawer';
+import Layout from './shell/Layout';
+import Orders from './components/Orders';
 
 
 
 function App() {
-  const [counter, setCounter] = React.useState(0);
-  const incrementer = () => setCounter((previousValue) => previousValue + 1) ;
-  function incrementer2() {
-    setCounter((previousState) => previousState + 1);
-  }
+  // const [counter, setCounter] = React.useState(0);
+  // const incrementer = () => setCounter((previousValue) => previousValue + 1);
+  // function incrementer2() {
+  //   setCounter((previousState) => previousState + 1);
+  // }
+
+  
+
   const jsxElement =
     <BrowserRouter>
-      <nav>
-        <ul>
-          <li><Link to="/">MyForm</Link></li>
-          <li><Link to="/extended">ExtendedForm</Link></li>
-          <li><Link to="/yup">FormWithYup</Link></li>
-          <li><Link to="/tabela">ElementiTabele</Link></li>
-          <li><Link to="/drawer">TemporaryDrawer</Link></li>
-        </ul>
-      </nav>
-      <Routes>
-        <Route path="/" element={<MyForm />} />
-        <Route path="/extended" element={<ExtendedForm />} />
-        <Route path="/yup" element={<FormWithYup />} />
-        <Route path="/tabela" element={<ElementiTabele />} />
-        <Route path="/drawer" element={<TemporaryDrawer />} />
-      </Routes>
-      <p>Counter: {counter}</p>
-      <Button variant="contained" onClick={incrementer2}>
-        Increment Counter
-      </Button>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<MyForm />} />
+          <Route path="/extended" element={<ExtendedForm />} />
+          <Route path="/yup" element={<FormWithYup />} />
+          <Route path="/tabela" element={<ElementiTabele />} />
+          <Route path="/drawer" element={<TemporaryDrawer />} />
+          <Route path="/orders" element={<Orders />} />
+        </Routes>
+      </Layout>
     </BrowserRouter>
   ;
   return jsxElement;
