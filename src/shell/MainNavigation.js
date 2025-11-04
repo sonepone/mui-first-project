@@ -5,27 +5,147 @@ import React from 'react';
 import { useLocation } from 'react-router-dom'; 
 import Box from '@mui/material/Box';
 import Orders from '../components/Orders';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import Button from '@mui/material/Button';
+//=====================================================================
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+import { Link } from 'react-router-dom';
+import BalanceIcon from '@mui/icons-material/Balance';
+import Drawer from '@mui/material/Drawer';
+import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
+import AndroidIcon from '@mui/icons-material/Android';
+import AttractionsIcon from '@mui/icons-material/Attractions';
+
+
 function MainNavigation() {
     const location = useLocation();
     const paths = ['/', '/extended', '/yup', '/tabela', '/drawer'];
     const current = paths.includes(location.pathname) ? location.pathname : false;
 
+//=====================================================================
+const [open, setOpen] = React.useState(false);
+
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+
+  const DrawerList = (
+    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+      <List>
+          <ListItem key={"Sone"} disablePadding>
+            <ListItemButton component={Link} to={"/tabela"}>
+              <ListItemIcon>
+                <BalanceIcon /> 
+              </ListItemIcon>
+              <ListItemText primary={"Sone"} />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem key={"MyForm"} disablePadding>
+            <ListItemButton component={Link} to={"/"}>
+              <ListItemIcon>
+                <AirplanemodeActiveIcon /> 
+              </ListItemIcon>
+              <ListItemText primary={"MyForm"} />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem key={"ExtendedForm"} disablePadding>
+            <ListItemButton component={Link} to={"/extended"}>
+              <ListItemIcon>
+                <AndroidIcon /> 
+              </ListItemIcon>
+              <ListItemText primary={"ExtendedForm"} />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem key={"Orders"} disablePadding>
+            <ListItemButton component={Link} to={"/orders"}>
+              <ListItemIcon>
+                <AttractionsIcon /> 
+              </ListItemIcon>
+              <ListItemText primary={"Orders"} />
+            </ListItemButton>
+          </ListItem>
+
+
+        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
+
+
+
+
+//=====================================================================
+
+
+
     return (
       <nav>
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Tabs
-            value={current}
-            aria-label="navigation tabs"
-            variant="scrollable"
-            scrollButtons="auto"
-        >
-            <Tab label="MyForm" value="/" component={NavLink} to="/" />
-            <Tab label="ExtendedForm" value="/extended" component={NavLink} to="/extended" />
-            <Tab label="FormWithYup" value="/yup" component={NavLink} to="/yup" />
-            <Tab label="ElementiTabele" value="/tabela" component={NavLink} to="/tabela" />
-            <Tab label="TemporaryDrawer" value="/drawer" component={NavLink} to="/drawer" />
-            <Tab label="Orders" value="/orders" component={NavLink} to="/orders" />
-        </Tabs>
+        <div>
+          {/* <Button onClick={toggleDrawer(true)}>Open drawer</Button> */}
+          <Drawer open={open} onClose={toggleDrawer(false)}>
+            {DrawerList}
+          </Drawer>
+        </div>
+
+
+        <Box sx={{ display: 'flex', flexDirection: 'column', boxShadow: 3, alignItems: 'center' }}>
+          <Box sx={{ height: 40 , width: '100%', backgroundColor: '#165799ff', display: 'flex', alignItems: 'center', justifyContent: 'left' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', border: '1px solid white',  borderRadius: 1, color: 'white' }}>
+              <IconButton aria-label="menu" sx={{ m: 2, color: 'white' }} onClick={toggleDrawer(true)}>
+                <MenuIcon />
+              </IconButton>
+            </Box>
+            
+          </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Tabs
+                value={current}
+                aria-label="navigation tabs"
+                variant="scrollable"
+                scrollButtons="auto"
+            >
+                <Tab label="MyForm" value="/" component={NavLink} to="/" />
+                <Tab label="ExtendedForm" value="/extended" component={NavLink} to="/extended" />
+                <Tab label="FormWithYup" value="/yup" component={NavLink} to="/yup" />
+                <Tab label="ElementiTabele" value="/tabela" component={NavLink} to="/tabela" />
+                <Tab label="TemporaryDrawer" value="/drawer" component={NavLink} to="/drawer" />
+                <Tab label="Orders" value="/orders" component={NavLink} to="/orders" />
+            </Tabs>
+          </Box>
         </Box>
       </nav>
     );
