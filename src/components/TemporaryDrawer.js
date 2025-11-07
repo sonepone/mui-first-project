@@ -12,9 +12,11 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { Link } from 'react-router-dom';
 import BalanceIcon from '@mui/icons-material/Balance';
+import Collapse from '@mui/material/Collapse';
 
 export default function TemporaryDrawer() {
   const [open, setOpen] = React.useState(false);
+  const [subMenuOpen, setSubMenuOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -31,7 +33,50 @@ export default function TemporaryDrawer() {
               <ListItemText primary={"Sone"} />
             </ListItemButton>
           </ListItem>
-
+//=====================================================================
+          <ListItem key={"Submenu"} disablePadding>
+            <ListItemButton onClick={(event) =>
+                                          {
+                                            event.stopPropagation();
+                                            setSubMenuOpen(!subMenuOpen)
+                                          }}>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="Submenu" />
+            </ListItemButton>
+            {subMenuOpen && (
+              <Collapse in={subMenuOpen} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  <ListItem key={"Submenu1"} disablePadding>
+                    <ListItemButton component={Link} to={"/submenu1"}>
+                      <ListItemIcon>
+                        <MailIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Submenu1" />
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem key={"Submenu2"} disablePadding>
+                    <ListItemButton component={Link} to={"/submenu2"}>
+                      <ListItemIcon>
+                        <MailIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Submenu2" />
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem key={"Submenu3"} disablePadding>
+                    <ListItemButton component={Link} to={"/submenu3"}>
+                      <ListItemIcon>
+                        <MailIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Submenu3" />
+                    </ListItemButton>
+                  </ListItem>
+                </List>
+              </Collapse>
+            )}
+          </ListItem>
+//=====================================================================
 
 
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (

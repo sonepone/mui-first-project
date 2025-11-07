@@ -45,7 +45,7 @@ const [open, setOpen] = React.useState(false);
               <ListItemIcon>
                 <BalanceIcon /> 
               </ListItemIcon>
-              <ListItemText primary={"Sone"} />
+              <ListItemText primary={"Tabela"} secondary="ElementiTabele" />
             </ListItemButton>
           </ListItem>
 
@@ -54,7 +54,7 @@ const [open, setOpen] = React.useState(false);
               <ListItemIcon>
                 <AirplanemodeActiveIcon /> 
               </ListItemIcon>
-              <ListItemText primary={"MyForm"} />
+              <ListItemText primary={"Neka forma"} secondary={"MyForm"}/>
             </ListItemButton>
           </ListItem>
 
@@ -63,7 +63,7 @@ const [open, setOpen] = React.useState(false);
               <ListItemIcon>
                 <AndroidIcon /> 
               </ListItemIcon>
-              <ListItemText primary={"ExtendedForm"} />
+              <ListItemText primary={"Проширена форма"} secondary={"ExtendedForm"}/>
             </ListItemButton>
           </ListItem>
 
@@ -76,7 +76,7 @@ const [open, setOpen] = React.useState(false);
             </ListItemButton>
           </ListItem>
 
-
+        <Divider />
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
@@ -122,9 +122,9 @@ const [open, setOpen] = React.useState(false);
         </div>
 
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', boxShadow: 3, alignItems: 'center' }}>
+        <Box sx={{ border: '3px solid gray', display: 'flex', flexDirection: 'column', boxShadow: 3, alignItems: 'center' }}>
           <Box sx={{ height: 40 , width: '100%', backgroundColor: '#165799ff', display: 'flex', alignItems: 'center', justifyContent: 'left' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', border: '1px solid white',  borderRadius: 1, color: 'white' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center',   borderRadius: 1, color: 'white' }}>
               <IconButton aria-label="menu" sx={{ m: 2, color: 'white' }} onClick={toggleDrawer(true)}>
                 <MenuIcon />
               </IconButton>

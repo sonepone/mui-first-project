@@ -13,7 +13,7 @@ function Orders({orders}) {
     return (
       <Box sx={{ width: '80%', margin: 'auto', marginTop: 5 }}>
         <h1>Orders</h1>
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: '1px solid grey', padding: 2, marginBottom: 4 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 2, marginBottom: 4 }}>
                 <form style={{display: "flex", flexDirection: "row", alignItems: "center"}} onSubmit={(e) => {
                     e.preventDefault();
                     const orderId = searchFieldRef.current.value;
@@ -24,7 +24,7 @@ function Orders({orders}) {
                 }}>
                     <TextField
                         // {...props}
-                        label="Search Order"
+                        label="Search for Order"
                         variant="outlined"
                         inputRef={searchFieldRef}
                     />
