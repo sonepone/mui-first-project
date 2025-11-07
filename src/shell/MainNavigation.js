@@ -41,13 +41,14 @@ function MainNavigation() {
 //=====================================================================
 const [open, setOpen] = React.useState(false);
 const [openMenu1, setOpenMenu1] = React.useState(false);
+const [openMenu2, setOpenMenu2] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
 
   const DrawerList = (
-    <Box sx={{ width: 350 }} role="presentation" onClick={toggleDrawer(false)}>
+    <Box sx={{ width: 350 }} role="presentation" onClick={() => {setOpenMenu1(false); setOpenMenu2(false); (toggleDrawer(false)()); }} onKeyDown={toggleDrawer(false)}>
       <List>
           <ListItem key={"Sone"} disablePadding>
             <ListItemButton component={Link} to={"/tabela"}>
@@ -88,13 +89,13 @@ const [openMenu1, setOpenMenu1] = React.useState(false);
           {/* pokusavam dodati item sa submenu  */}
           {/* <ListItem key={"MojSubmenu1"} disablePadding> */}
 
-            <ListItemButton onClick={(event) => { event.stopPropagation(); setOpenMenu1(!openMenu1)}}>
+            <ListItemButton onClick={(event) => { event.stopPropagation() /*da se ne zatvori glavni meni*/; setOpenMenu1(!openMenu1)}}>
               <ListItemIcon><InboxIcon /></ListItemIcon>
               <ListItemText primary="Projects" />
               {openMenu1 ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={openMenu1} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding onClick={(event) => { setOpenMenu1(false);  }}>
+              <List component="div" disablePadding onClick={(event) => { setOpenMenu1(false); setOpenMenu2(false); }}>
                 <ListItemButton sx={{ pl: 4 }}>
                   <ListItemIcon><StarBorder /></ListItemIcon>
                   <ListItemText primary="Project A" />
@@ -109,8 +110,30 @@ const [openMenu1, setOpenMenu1] = React.useState(false);
                 </ListItemButton>
               </List>
             </Collapse>
-
           {/* </ListItem> */}
+
+        {/* Expandable Menu 2 */}
+        <ListItemButton onClick={(event) => { event.stopPropagation(); setOpenMenu2(!openMenu2) }}>
+          <ListItemIcon><InboxIcon /></ListItemIcon>
+          <ListItemText primary="Management" />
+          {openMenu2 ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse in={openMenu2} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding onClick={() => { setOpenMenu1(false); setOpenMenu2(false); }}>
+            <ListItemButton sx={{ pl: 4 }}>
+              <ListItemIcon><StarBorder /></ListItemIcon>
+              <ListItemText primary="Users" />
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 4 }}>
+              <ListItemIcon><StarBorder /></ListItemIcon>
+              <ListItemText primary="Roles" />
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 4 }}>
+              <ListItemIcon><StarBorder /></ListItemIcon>
+              <ListItemText primary="Permissions" />
+            </ListItemButton>
+          </List>
+        </Collapse>
 
         <Divider />
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
@@ -181,7 +204,7 @@ const [openMenu1, setOpenMenu1] = React.useState(false);
                 <MenuIcon />
               </IconButton>
 
-              <Typography variant="h6">My App</Typography>
+              <Typography variant="h6">Medicinska Dokumentacija</Typography>
             </Toolbar>
           </AppBar>
 
