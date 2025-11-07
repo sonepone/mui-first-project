@@ -48,7 +48,7 @@ const [openMenu2, setOpenMenu2] = React.useState(false);
   };
 
   const DrawerList = (
-    <Box sx={{ width: 350 }} role="presentation" onClick={() => {setOpenMenu1(false); setOpenMenu2(false); (toggleDrawer(false)()); }} onKeyDown={toggleDrawer(false)}>
+    <Box sx={{ width: 250 }} role="presentation" onClick={() => {setOpenMenu1(false); setOpenMenu2(false); (toggleDrawer(false)()); }} onKeyDown={toggleDrawer(false)}>
       <List>
           <ListItem key={"Sone"} disablePadding>
             <ListItemButton component={Link} to={"/tabela"}>
@@ -175,7 +175,7 @@ const [openMenu2, setOpenMenu2] = React.useState(false);
       <nav>
         <div>
           {/* <Button onClick={toggleDrawer(true)}>Open drawer</Button> */}
-          <Drawer open={open} onClose={toggleDrawer(false)}>
+          <Drawer open={open} onClose={ () => {  (toggleDrawer(false))(); setOpenMenu1(false); setOpenMenu2(false);    }}>
             {DrawerList}
           </Drawer>
         </div>
