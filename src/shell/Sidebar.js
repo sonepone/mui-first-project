@@ -55,7 +55,7 @@ export default function Sidebar({ open, onClose }) {
           {openMenu1 ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={openMenu1} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding onClick={(event) => { setOpenMenu1(false)}}>
+          <List component="div" disablePadding onClick={(event) => { setOpenMenu1(false); setOpenMenu2(false); }}>
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon><StarBorder /></ListItemIcon>
               <ListItemText primary="Project A" />
@@ -72,13 +72,13 @@ export default function Sidebar({ open, onClose }) {
         </Collapse>
 
         {/* Expandable Menu 2 */}
-        <ListItemButton onClick={() => setOpenMenu2(!openMenu2)}>
+        <ListItemButton onClick={(event) => { event.stopPropagation(); setOpenMenu2(!openMenu2) }}>
           <ListItemIcon><InboxIcon /></ListItemIcon>
           <ListItemText primary="Management" />
           {openMenu2 ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={openMenu2} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
+          <List component="div" disablePadding onClick={() => { setOpenMenu1(false); setOpenMenu2(false); }}>
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon><StarBorder /></ListItemIcon>
               <ListItemText primary="Users" />

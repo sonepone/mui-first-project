@@ -23,6 +23,14 @@ import Drawer from '@mui/material/Drawer';
 import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
 import AndroidIcon from '@mui/icons-material/Android';
 import AttractionsIcon from '@mui/icons-material/Attractions';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Collapse from '@mui/material/Collapse';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import StarBorder from '@mui/icons-material/StarBorder';
+//=====================================================================
 
 
 function MainNavigation() {
@@ -32,13 +40,14 @@ function MainNavigation() {
 
 //=====================================================================
 const [open, setOpen] = React.useState(false);
+const [openMenu1, setOpenMenu1] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
 
   const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+    <Box sx={{ width: 350 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
           <ListItem key={"Sone"} disablePadding>
             <ListItemButton component={Link} to={"/tabela"}>
@@ -75,6 +84,33 @@ const [open, setOpen] = React.useState(false);
               <ListItemText primary={"Orders"} />
             </ListItemButton>
           </ListItem>
+
+          {/* pokusavam dodati item sa submenu  */}
+          {/* <ListItem key={"MojSubmenu1"} disablePadding> */}
+
+            <ListItemButton onClick={(event) => { event.stopPropagation(); setOpenMenu1(!openMenu1)}}>
+              <ListItemIcon><InboxIcon /></ListItemIcon>
+              <ListItemText primary="Projects" />
+              {openMenu1 ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={openMenu1} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding onClick={(event) => { setOpenMenu1(false);  }}>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon><StarBorder /></ListItemIcon>
+                  <ListItemText primary="Project A" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon><StarBorder /></ListItemIcon>
+                  <ListItemText primary="Project B" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon><StarBorder /></ListItemIcon>
+                  <ListItemText primary="Project C" />
+                </ListItemButton>
+              </List>
+            </Collapse>
+
+          {/* </ListItem> */}
 
         <Divider />
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
@@ -123,14 +159,33 @@ const [open, setOpen] = React.useState(false);
 
 
         <Box sx={{ border: '3px solid gray', display: 'flex', flexDirection: 'column', boxShadow: 3, alignItems: 'center' }}>
-          <Box sx={{ height: 40 , width: '100%', backgroundColor: '#165799ff', display: 'flex', alignItems: 'center', justifyContent: 'left' }}>
+
+          {/* <Box sx={{ height: 40 , width: '100%', backgroundColor: '#165799ff', display: 'flex', alignItems: 'center', justifyContent: 'left' }}>
             <Box sx={{ display: 'flex', alignItems: 'center',   borderRadius: 1, color: 'white' }}>
               <IconButton aria-label="menu" sx={{ m: 2, color: 'white' }} onClick={toggleDrawer(true)}>
                 <MenuIcon />
               </IconButton>
             </Box>
-            
-          </Box>
+          </Box> */}
+
+          {/* TOP BLUE BAR */}
+          <AppBar position="static">
+            {/* <Toolbar sx={{border: '2px red solid', height: '32px!important', minHeight: 'unset!important'}}> */}
+            <Toolbar sx={{border: '2px red solid', height: '48px!important', minHeight: 'unset!important'}}>
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                onClick={toggleDrawer(!open)}
+              >
+                <MenuIcon />
+              </IconButton>
+
+              <Typography variant="h6">My App</Typography>
+            </Toolbar>
+          </AppBar>
+
+
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Tabs
                 value={current}
