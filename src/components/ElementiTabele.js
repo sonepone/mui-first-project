@@ -26,13 +26,19 @@ for (let i = 7; i <= 500; i++) {
 }
 
 export default function ElementiTabele() {
+        //   pageSize={5}
+        // rowsPerPageOptions={[5]}
+        // pageSizeOptions={[{label: "25 redova", value: 25}, {label: "50 redova", value: 50}, {label: "100 redova", value: 100}]}
+        // initialState={{pagination: {paginationModel:{pageSize: 5}}}}
+        // pageSizeOptions={[5]}
+
+
   return (
-    <Box sx={{ height: 400, width: '80%', margin: 'auto', marginTop: 5 }}>
+    <Box sx={{ height: 580, width: '80%', margin: 'auto', marginTop: 5 }}>
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        pageSizeOptions={[{label: "25 redova", value: 25}, {label: "50 redova", value: 50}, {label: "100 redova", value: 100}]}
       />
     </Box>
   );
