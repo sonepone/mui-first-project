@@ -35,7 +35,7 @@ import StarBorder from '@mui/icons-material/StarBorder';
 
 function MainNavigation() {
     const location = useLocation();
-    const paths = ['/', '/extended', '/yup', '/tabela', '/drawer'];
+    const paths = ['/', '/extended', '/yup', '/tabela', '/drawer', '/orders'];
     const current = paths.includes(location.pathname) ? location.pathname : false;
 
 //=====================================================================
@@ -43,12 +43,64 @@ const [open, setOpen] = React.useState(false);
 const [openMenu1, setOpenMenu1] = React.useState(false);
 const [openMenu2, setOpenMenu2] = React.useState(false);
 
+// objekat koji kontrolise da li je submenu otvoren ili zatvoren
+// u aplikaciji moze biti vise submenu-a, pa u ovom objektu stoje svi
+// npr. {sub1: true, sub2: false} -- znaci: submenu1 - otvoren;  submenu2 - zatvoren
+//
+const  [submenuOpen, setSubmenuOpen] = React.useState({});
+console.log('************************* submenuOpen *************************');
+console.log(submenuOpen);
+console.log('************************* submenuOpen *************************');
+
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
 
+  // toggle statusa pojedinacnog submenija
+  const toggleSubmenu = (submenuName) => {
+     setSubmenuOpen( (prevSubmenuOpen) => {
+        console.log("U toggle-u - da vidimo kakav je submeni bio:");
+        console.log(`prevSubmenuOpen[submenuName] = ${prevSubmenuOpen[submenuName]}`);
+
+        const newSubmenuOpen = {
+          ...prevSubmenuOpen, 
+          [submenuName]:  !prevSubmenuOpen[submenuName]
+            
+        };
+
+        console.log('Nakon toglovanja');
+        console.log(newSubmenuOpen);
+
+        return newSubmenuOpen;
+     } );
+  };
+
+  // zatvaranje ili otvaranje svih submenija
+  const setAllSubmenus = (newState) => {
+     setSubmenuOpen( (previousState) => {
+         let returnObject = {};
+         for(const key in previousState){
+            returnObject[key] = newState;
+         }
+         console.log('----------------------------------------------');
+         console.log('Vracam resetovan objekat:');
+         console.log(returnObject);
+         console.log('----------------------------------------------');         
+         return returnObject;
+     } );
+  };
+
+
   const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={() => {setOpenMenu1(false); setOpenMenu2(false); (toggleDrawer(false)()); }} onKeyDown={toggleDrawer(false)}>
+    <Box sx={{ width: 250 }} role="presentation" 
+       onClick={() => { 
+               console.log('Klik na stavku menija');
+               //setOpenMenu1(false); 
+               //setOpenMenu2(false); 
+               setAllSubmenus(false); // sve submenije zatvaramo
+               toggleDrawer(false).apply(); 
+              }}
+       onKeyDown={toggleDrawer(false)}>
       <List>
           <ListItem key={"Sone"} disablePadding>
             <ListItemButton component={Link} to={"/tabela"}>
@@ -89,13 +141,25 @@ const [openMenu2, setOpenMenu2] = React.useState(false);
           {/* pokusavam dodati item sa submenu  */}
           {/* <ListItem key={"MojSubmenu1"} disablePadding> */}
 
-            <ListItemButton onClick={(event) => { event.stopPropagation() /*da se ne zatvori glavni meni*/; setOpenMenu1(!openMenu1)}}>
+            <ListItemButton onClick={(event) => { 
+              event.stopPropagation() /*da se ne zatvori glavni meni*/; 
+              //setOpenMenu1(!openMenu1)
+              toggleSubmenu('submenu1');
+              }
+            }>
               <ListItemIcon><InboxIcon /></ListItemIcon>
               <ListItemText primary="Projects" />
-              {openMenu1 ? <ExpandLess /> : <ExpandMore />}
+              {submenuOpen['submenu1']/*openMenu1*/ ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
-            <Collapse in={openMenu1} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding onClick={(event) => { setOpenMenu1(false); setOpenMenu2(false); }}>
+            <Collapse in={submenuOpen['submenu1'] /*openMenu1*/} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding 
+                 onClick={(event) => 
+                    { 
+                      //setOpenMenu1(false); 
+                      //setOpenMenu2(false); 
+                      setAllSubmenus(false);
+                    }
+                  }>
                 <ListItemButton sx={{ pl: 4 }}>
                   <ListItemIcon><StarBorder /></ListItemIcon>
                   <ListItemText primary="Project A" />
@@ -113,13 +177,23 @@ const [openMenu2, setOpenMenu2] = React.useState(false);
           {/* </ListItem> */}
 
         {/* Expandable Menu 2 */}
-        <ListItemButton onClick={(event) => { event.stopPropagation(); setOpenMenu2(!openMenu2) }}>
+        <ListItemButton onClick={(event) => { 
+             event.stopPropagation();
+               //setOpenMenu2(!openMenu2);
+               toggleSubmenu('submenu2')
+             }}>
           <ListItemIcon><InboxIcon /></ListItemIcon>
           <ListItemText primary="Management" />
-          {openMenu2 ? <ExpandLess /> : <ExpandMore />}
+          { submenuOpen['submenu2']/*openMenu2*/ ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
-        <Collapse in={openMenu2} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding onClick={() => { setOpenMenu1(false); setOpenMenu2(false); }}>
+        <Collapse in={ submenuOpen['submenu2'] /*openMenu2*/} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding 
+             onClick={() => { 
+               //setOpenMenu1(false); 
+               //setOpenMenu2(false); 
+               setAllSubmenus(false);
+               }
+               }>
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon><StarBorder /></ListItemIcon>
               <ListItemText primary="Users" />
@@ -175,7 +249,14 @@ const [openMenu2, setOpenMenu2] = React.useState(false);
       <nav>
         <div>
           {/* <Button onClick={toggleDrawer(true)}>Open drawer</Button> */}
-          <Drawer open={open} onClose={ () => {  (toggleDrawer(false))(); setOpenMenu1(false); setOpenMenu2(false);    }}>
+          <Drawer open={open} 
+             onClose={ () => {  
+                (toggleDrawer(false))(); 
+                //setOpenMenu1(false); 
+                //setOpenMenu2(false); 
+                setAllSubmenus(false);
+
+                }}>
             {DrawerList}
           </Drawer>
         </div>
@@ -199,12 +280,13 @@ const [openMenu2, setOpenMenu2] = React.useState(false);
                 edge="start"
                 color="inherit"
                 aria-label="menu"
-                onClick={toggleDrawer(!open)}
+                onClick={ toggleDrawer(!open)                 
+                }
               >
                 <MenuIcon />
               </IconButton>
 
-              <Typography variant="h6">Medicinska Dokumentacija</Typography>
+              <Typography variant="h6">{"Medicinska Dokumentacija"}</Typography>
             </Toolbar>
           </AppBar>
 

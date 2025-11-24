@@ -51,7 +51,7 @@ export default function ExtendedForm() {
       <Controller
         name="name"
         control={control}
-        rules={{ required: "Ime je obavezno polje!!!" }}
+        rules={{ required: "Ime je obavezno polje!!!", validate: (staSiMiProslijedio) => {console.log(staSiMiProslijedio); return true;} }}
 
         render={({ field, fieldState }) => (
             <>
