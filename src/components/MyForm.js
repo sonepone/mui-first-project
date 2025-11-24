@@ -37,7 +37,6 @@ export default function MyForm() {
         }}
         
         render={({ field, fieldState, formState }) => {
-            console.log(formState);
           return (
           <TextField
             {...field}

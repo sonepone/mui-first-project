@@ -48,9 +48,6 @@ const [openMenu2, setOpenMenu2] = React.useState(false);
 // npr. {sub1: true, sub2: false} -- znaci: submenu1 - otvoren;  submenu2 - zatvoren
 //
 const  [submenuOpen, setSubmenuOpen] = React.useState({});
-console.log('************************* submenuOpen *************************');
-console.log(submenuOpen);
-console.log('************************* submenuOpen *************************');
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -59,17 +56,12 @@ console.log('************************* submenuOpen *************************');
   // toggle statusa pojedinacnog submenija
   const toggleSubmenu = (submenuName) => {
      setSubmenuOpen( (prevSubmenuOpen) => {
-        console.log("U toggle-u - da vidimo kakav je submeni bio:");
-        console.log(`prevSubmenuOpen[submenuName] = ${prevSubmenuOpen[submenuName]}`);
 
         const newSubmenuOpen = {
           ...prevSubmenuOpen, 
           [submenuName]:  !prevSubmenuOpen[submenuName]
             
         };
-
-        console.log('Nakon toglovanja');
-        console.log(newSubmenuOpen);
 
         return newSubmenuOpen;
      } );
@@ -82,10 +74,6 @@ console.log('************************* submenuOpen *************************');
          for(const key in previousState){
             returnObject[key] = newState;
          }
-         console.log('----------------------------------------------');
-         console.log('Vracam resetovan objekat:');
-         console.log(returnObject);
-         console.log('----------------------------------------------');         
          return returnObject;
      } );
   };
@@ -254,7 +242,7 @@ console.log('************************* submenuOpen *************************');
                 (toggleDrawer(false))(); 
                 //setOpenMenu1(false); 
                 //setOpenMenu2(false); 
-                setAllSubmenus(false);
+                setAllSubmenus(false); // zatvaramo sve submenije
 
                 }}>
             {DrawerList}

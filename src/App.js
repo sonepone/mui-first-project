@@ -40,6 +40,7 @@ import TemporaryDrawer from './components/TemporaryDrawer';
 import Layout from './shell/Layout';
 import Orders from './components/Orders';
 import OrderDetails from './components/OrderDetails';
+import AppContextProvider from './store/AppContextProvider';
 
 
 
@@ -58,19 +59,21 @@ function App() {
   
 
   const jsxElement =
-    <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<MyForm />} />
-          <Route path="/extended" element={<ExtendedForm />} />
-          <Route path="/yup" element={<FormWithYup />} />
-          <Route path="/tabela" element={<ElementiTabele />} />
-          <Route path="/drawer" element={<TemporaryDrawer />} />
-          <Route path="/orders" element={<Orders orders={orders}/>} />
-          <Route path="/orders/:id" element={<OrderDetails allOrders={orders} showBig={true} />} />
-        </Routes>
-      </Layout>
-    </BrowserRouter>
+    <AppContextProvider>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<MyForm />} />
+            <Route path="/extended" element={<ExtendedForm />} />
+            <Route path="/yup" element={<FormWithYup />} />
+            <Route path="/tabela" element={<ElementiTabele />} />
+            <Route path="/drawer" element={<TemporaryDrawer />} />
+            <Route path="/orders" element={<Orders orders={orders}/>} />
+            <Route path="/orders/:id" element={<OrderDetails allOrders={orders} showBig={true} />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
+    </AppContextProvider>
   ;
   return jsxElement;
 }
