@@ -1,6 +1,7 @@
 import React from 'react';
 import MainNavigation from './MainNavigation';
 import AppContext from '../store/AppContext';
+import MainNav from '../nav/MainNav';
 
 function Layout({ children }) {
 
@@ -17,7 +18,8 @@ function Layout({ children }) {
 
   return (
     <div>
-      <MainNavigation />
+      {/* <MainNavigation /> */}
+      <MainNav />
       <main>{children}</main>
       {/* <button onClick={promjeniParam1}>Ja sam dugme i klikni me da se promjeni parametar1 </button> */}
     </div>
