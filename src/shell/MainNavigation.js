@@ -46,7 +46,6 @@ const [openMenu2, setOpenMenu2] = React.useState(false);
 // objekat koji kontrolise da li je submenu otvoren ili zatvoren
 // u aplikaciji moze biti vise submenu-a, pa u ovom objektu stoje svi
 // npr. {sub1: true, sub2: false} -- znaci: submenu1 - otvoren;  submenu2 - zatvoren
-//
 const  [submenuOpen, setSubmenuOpen] = React.useState({});
 
   const toggleDrawer = (newOpen) => () => {

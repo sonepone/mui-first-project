@@ -92,7 +92,6 @@ function SideMenu({toggleDrawer, open}) {
               <ListItemText primary={"Проширена форма"} secondary={"ExtendedForm"}/>
             </ListItemButton>
           </ListItem>
-          {/* pojedinacna stavka menija: */}
           <SideMenuItem menuItem={{key: "Orders", action: "/orders", title1: "Orders", title2: "", iconName: "ViewList", type: "common-menu-item", submenuItems: null, onClick: null}} />
 {/* 
 
@@ -107,17 +106,15 @@ function SideMenu({toggleDrawer, open}) {
 
           {/* Sada slijedi submenu */}
            {/* <ListItem key={"MojSubmenu1"} disablePadding>  */}
-           <SideMenuItem menuItem={
-                                    { key: "submenu10", action: "", title1: "Šifarnici", title2: ""/*"Unos šifara"*/
-                                    , iconName: "Toc"
-                                    , type: "container-menu-item"
-                                    , submenuItems: submenuItems
-                                    , toggleSubmenu: toggleSubmenu
-                                    , submenuOpen: submenuOpen
-                                    , setAllSubmenus: setAllSubmenus
-                                    }
-                                  }
-           />
+<SideMenuItem menuItem={
+   {key: "submenu10", action: "", title1: "Šifarnici", title2: ""/*"Unos šifara"*/
+    , iconName: "Toc"
+    , type: "container-menu-item"
+    , submenuItems: submenuItems
+    , toggleSubmenu: toggleSubmenu
+    , submenuOpen: submenuOpen
+    , setAllSubmenus: setAllSubmenus
+}} />
 
             <ListItemButton onClick={(event) => { 
                                           event.stopPropagation() /*da se ne zatvori glavni meni*/; 
