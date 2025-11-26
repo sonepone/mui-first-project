@@ -112,11 +112,12 @@ function SideMenu({toggleDrawer, open}) {
               }}
        onKeyDown={toggleDrawer(false)}>
       <List>
-          {/* OVO JE CIJELI MENI - OSTALO CEMO BRISATI KAD OVO PRORADI */}
+          {/* OVO JE CIJELI MENI - OSTALO CEMO BRISATI KAD OVO PRORADI - POCETAK */}
           {fullMenuItems.map( (menuItem) => (
               <SideMenuItem key={menuItem.key} menuItem={menuItem} />
           ))  }
           <Divider />
+          {/* OVO JE CIJELI MENI - OSTALO CEMO BRISATI KAD OVO PRORADI - KRAJ */}
           <Divider />
           <ListItem key={"Sone"} disablePadding>
             <ListItemButton component={Link} to={"/tabela"}>
