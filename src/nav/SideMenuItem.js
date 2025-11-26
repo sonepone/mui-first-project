@@ -9,6 +9,7 @@ import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
 
 function SideMenuItem({ menuItem }) {
     const { key, action, title1, title2, iconName, type, submenuItems, toggleSubmenu, submenuOpen, setAllSubmenus } = menuItem;
@@ -67,6 +68,9 @@ console.log('SideMenuItem props:', { key, action, title1, title2, iconName, type
        );
 
 
+    }
+    else if (type === 'separator-menu-item') {
+        jsx_code = (<Divider />);
     }
 
 

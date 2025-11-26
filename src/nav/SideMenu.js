@@ -53,9 +53,55 @@ function SideMenu({toggleDrawer, open}) {
          return returnObject;
      } );
   };
+  // ovo cemo kasnije brisati
   const submenuItems = [{key: "submenu10-1", action: "/extended", title1: "My extended", title2: "Extended - 2", iconName: "Vignette", type: "common-menu-item"},
                         {key: "submenu10-2", action: "/tabela", title1: "My ElementiTabele", title2: "ElementiTabele - 2", iconName: "Subscriptions", type: "common-menu-item"}]
 
+  const fullMenuItems = [
+{ key: "Sone-2"
+, action: "/tabela"
+, title1: "Tabela"
+, title2: "Tabela - opis"
+, iconName: "Kitesurfing"
+, type: "common-menu-item"
+, submenuItems: null },
+{
+  type: "separator-menu-item"
+},
+{ key: "MyForm-2"
+, action: "/"
+, title1: "Neka forma"
+, title2: "MyForm"
+, iconName: "LineAxis"
+, type: "common-menu-item"
+, submenuItems: null },
+{ key: "ExtendedForm-2"
+, action: "/extended"
+, title1: "Проширена форма"
+, title2: "ExtendedForm"
+, iconName: "Moped"
+, type: "common-menu-item"
+, submenuItems: null },
+{ key: "orders-2"
+, action: "/orders"
+, title1: "Orders"
+, title2: ""
+, iconName: "ViewList"
+, type: "common-menu-item"
+, submenuItems: null },
+{ key: "submenu10-2"
+, action: ""
+, title1: "Šifarnici"
+, title2: ""/*"Unos šifara"*/
+, iconName: "Toc"
+, type: "container-menu-item"
+, toggleSubmenu: toggleSubmenu
+, submenuOpen: submenuOpen
+, setAllSubmenus: setAllSubmenus
+, submenuItems: [ {key: "submenu10-1", action: "/extended", title1: "My extended", title2: "Extended - 2", iconName: "Vignette", type: "common-menu-item"},
+                  {key: "submenu10-2", action: "/tabela", title1: "My ElementiTabele", title2: "ElementiTabele - 2", iconName: "Subscriptions", type: "common-menu-item"}]
+}
+  ];                        
   //===========================================================
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" 
@@ -66,6 +112,12 @@ function SideMenu({toggleDrawer, open}) {
               }}
        onKeyDown={toggleDrawer(false)}>
       <List>
+          {/* OVO JE CIJELI MENI - OSTALO CEMO BRISATI KAD OVO PRORADI */}
+          {fullMenuItems.map( (menuItem) => (
+              <SideMenuItem key={menuItem.key} menuItem={menuItem} />
+          ))  }
+          <Divider />
+          <Divider />
           <ListItem key={"Sone"} disablePadding>
             <ListItemButton component={Link} to={"/tabela"}>
               <ListItemIcon>
@@ -93,7 +145,7 @@ function SideMenu({toggleDrawer, open}) {
             </ListItemButton>
           </ListItem>
           {/* pojedinacna stavka menija: */}
-          <SideMenuItem menuItem={{key: "Orders", action: "/orders", title1: "Orders", title2: "", iconName: "ViewList", type: "common-menu-item", submenuItems: null, onClick: null}} />
+          <SideMenuItem menuItem={{key: "Orders", action: "/orders", title1: "Orders", title2: "", iconName: "ViewList", type: "common-menu-item", submenuItems: null}} />
 {/* 
 
           <ListItem key={"Orders"} disablePadding>
